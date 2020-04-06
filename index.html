@@ -12,31 +12,124 @@
     <div class="centering">
       <div class="popup-container">
         <h3 class="popup-title">COOKIES</h3>
-        <img src="./images/optAd360.svg" />
-        <p class="popup-content">
-          OptAd360 i nasi partnerzy, używają plików cookie i podobnych
-          technologii do personalizacji doświadczenia w sieci, pomiaru i poprawy
-          wydajności, wyświetlania odpowiednich reklam oraz do celów
-          analitycznych. Możesz zaktualizować swoje wybory w dowolnym
-          momencie.<br />
-          <a
-            class="privatePolicy"
-            href="https://www.optad360.com/polityka-prywatnosci.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Polityka prywatności</a
-          >
-          <br />
-          <a class="vendors" target="_blank" rel="noopener noreferrer"
-            >Lista partnerów (dostawców)</a
-          >
-        </p>
-        <div class="buttons-container">
-          <button>Accept</button>
-          <button>Reject</button>
-        </div>
+        <img id="logo" src="./images/optAd360.svg" />
+        <section id="cookies-consent">
+          <p class="popup-text">
+            Ta strona wykorzystuje pliki cookie. Używamy informacji zapisanych
+            za pomocą plików cookies w celu zapewnienia maksymalnej wygody w
+            korzystaniu z naszego serwisu. Mogą też korzystać z nich
+            współpracujące z nami firmy badawcze oraz reklamowe. Jeżeli wyrażasz
+            zgodę na zapisywanie informacji zawartej w cookies kliknij Accept w
+            lewym dolnym rogu. <br />
+            <a
+              class="privatePolicy"
+              href="https://www.optad360.com/polityka-prywatnosci.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Polityka prywatności</a
+            >
+            <br />
+            <a id="vendors-button" target="_blank" rel="noopener noreferrer"
+              >Lista partnerów</a
+            >
+          </p>
+          <div class="buttons-container">
+            <button>Accept</button>
+            <button>Reject</button>
+          </div>
+        </section>
+        <section id="vendor-list" class="hide">
+          <div id="vendor-list-header">
+            <a class="back-btn-handler" role="button" href="javascript:void(0)">
+              <!-- <img id="back-arrow" src="./images/back.svg" /> -->
+              <p class="back-button-text">Wstecz</p>
+            </a>
+            <h3 id="vendor-list-title">Lista Partnerów</h3>
+
+            <div id="select-all-container">
+              <div id="checkbox">
+                <div id="select-all-text">
+                  <p>Zezwól na wszystkie zgody</p>
+                </div>
+                <div id="select-all-input-container" class="checkbox-container">
+                  <input
+                    id="select-all-input"
+                    class="checkbox-input"
+                    type="checkbox"
+                    checked="true"
+                  />
+                  <label
+                    for="select-all-input"
+                    id="select-all-label"
+                    class="checkbox-label"
+                  >
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- VENDORS -->
+          <div id="vendor-list-content">
+            <ul id="vendor-list-content-container"></ul>
+          </div>
+          <!-- END VENDORS -->
+        </section>
       </div>
     </div>
-    <script src="tsx/main.tsx"></script>
+
+    <section id="filler-text-section">
+      <div id="filler-container">
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+      </div>
+    </section>
+    <script src="tsx/main.js"></script>
   </body>
 </html>

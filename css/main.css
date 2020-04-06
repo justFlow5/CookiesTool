@@ -49,12 +49,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 .popup-container {
 
-    width: 50rem;
-    min-height: 30rem;
+    position: relative;
+
+    width: 550px;
+    min-height: 400px;
     background-color: #232323;
     border-radius: 10px;
     opacity: 0;
@@ -70,15 +73,16 @@ body {
     position: relative;
     overflow: hidden;
 
+
 }
 
-.popup-container.active img {
+.popup-container.active #logo {
     width: 10rem;
     position: absolute;
     top: 1.5rem;
     left: 1.5rem;
     padding-bottom: 1rem;
-    z-index: 5;
+    /* z-index: 5; */
 }
 
 .popup-container.active>.popup-title {
@@ -91,7 +95,7 @@ body {
     /* letter-spacing: 0.5rem; */
 }
 
-.popup-container.active .popup-content {
+.popup-container.active .popup-text {
     /* display: flex;
     justify-content: center;
     align-items: center; */
@@ -103,7 +107,7 @@ body {
     /* text-align: left; */
 }
 
-.popup-container.active .popup-content .privatePolicy {
+.popup-container.active .popup-text .privatePolicy {
     /* text-decoration: underline; */
     color: #FF3336;
     cursor: pointer;
@@ -111,11 +115,11 @@ body {
     padding-top: 2rem;
 }
 
-.popup-container.active .popup-content .privatePolicy:hover {
+.popup-container.active .popup-text .privatePolicy:hover {
     text-decoration: none;
 }
 
-.popup-container.active .popup-content .vendors {
+.popup-container.active .popup-text #vendors-button {
     text-align: left;
     font-weight: 500;
     color: #FF3336;
@@ -153,4 +157,267 @@ body {
     -moz-box-shadow: 0px 10px 12px -9px rgba(0, 0, 0, 1);
     box-shadow: 0px 10px 12px -9px rgba(0, 0, 0, 1);
 
+}
+
+
+/* VENDORS LIST */
+#vendor-list {
+    /* width: 100%; */
+    /* min-height: inherit; */
+    /* position: relative; */
+    background: #232323;
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+
+#vendor-list.hide {
+    display: none;
+}
+
+#vendor-list-header {
+    /* width: 100%; */
+    /* height: 50px; */
+    margin: 20px 40px 0 30px;
+}
+
+#vendor-list-header .back-btn-handler {
+    display: inline-block;
+    /* margin: 20px 0 0 20px; */
+    text-decoration: none;
+    ;
+}
+
+
+#vendor-list-header .back-btn-handler:hover #back-arrow,
+#vendor-list-header .back-btn-handler:hover .back-button-text {
+    color: rgba(255, 255, 255, 0.555);
+}
+
+
+#vendor-list-header .back-btn-handler:hover svg {
+    fill: rgba(255, 255, 255, 0.555);
+}
+
+#vendor-list-header #back-arrow {
+    width: 10px;
+
+    display: inline-block;
+
+}
+
+#vendor-list-header .back-button-text {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.4rem;
+    position: relative;
+
+    top: -2px;
+    margin-left: 3px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    transition: color 0.3s;
+
+}
+
+#vendor-list-header .back-button-text::before {
+    /* content: '\02C2'; */
+    content: '\276E';
+    margin-right: 4px;
+    font-size: 2.3rem;
+    position: relative;
+    bottom: -3px;
+    /* font-weight: 700; */
+
+}
+
+#vendor-list-header .back-btn-handler {
+    /* margin: 20px 0 0 10px; */
+
+}
+
+#vendor-list-title {
+    color: #fff;
+    font-size: 2.3rem;
+    /* margin: 20px auto 30px 10px; */
+    margin: 30px 0 10px 60px;
+}
+
+
+#select-all-container {
+    text-align: right;
+}
+
+#select-all-input-container {
+    display: inline-block;
+    position: relative;
+}
+
+#select-all-label {
+    bottom: -5px;
+}
+
+.checkbox-label {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #FF3336;
+    bottom: 4px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 5px;
+
+    transition: background 0.3s;
+}
+
+.checkbox-label::after {
+    content: '\2714';
+    position: absolute;
+    top: -2px;
+    bottom: 0px;
+
+    /* left: 0; */
+    right: 2px;
+    font-size: 1.6rem;
+    color: #fff;
+    opacity: 0;
+
+    transition: opacity 0.3s;
+}
+
+#checkbox {
+    display: inline-block;
+    margin: 0px 70px 15px auto;
+
+}
+
+#select-all-text {
+    font-size: 1.3rem;
+    color: #fff;
+    display: inline-block;
+    font-weight: 600;
+
+}
+
+.checkbox-input {
+    opacity: 0;
+    position: absolute;
+}
+
+.checkbox-input:checked~.checkbox-label {
+    background: #FF3336;
+}
+
+.checkbox-input:checked~.checkbox-label {
+    background: #FF3336;
+}
+
+.checkbox-input:checked~.checkbox-label::after {
+
+    /* content: '\2714' */
+    opacity: 1;
+}
+
+
+/* VENDORS LIST */
+#vendor-list-content {
+    /* margin: 10px 50px 20px; */
+    overflow-y: scroll;
+    width: 70%;
+    margin: 0 auto;
+    padding: 20px 0;
+    max-height: 200px;
+}
+
+#vendor-list-content-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 20px 0 auto;
+    /* overflow-y: scroll; */
+    max-height: 250px;
+    padding-bottom: 30px;
+    list-style: none;
+}
+
+.vendor-item {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between; */
+    position: relative;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #686868;
+}
+
+.vendor-item .checkbox-container {
+    /* width: 30%; */
+    margin-left: 60px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+
+    /* margin: 0 20px 0 auto; */
+
+}
+
+
+.vendor-info {
+    position: relative;
+    display: inline-block;
+    /* flex: 1 1 40%; */
+    /* margin-left: 20px; */
+    width: 60%;
+}
+
+.vendor-company {
+    color: #fff;
+    font-size: 1.7rem;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.vendor-link {
+    display: block;
+    color: #FF3336;
+    color: #F74A4C;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+
+}
+
+.vendor-link:hover {
+    text-decoration: underline;
+}
+
+
+
+/* FILLER TEXT */
+
+#filler-text-section {
+    background: #e6e6e6;
+}
+
+#filler-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+
+}
+
+#filler-container div {
+    margin: 50px;
+    /* background-color: #F74A4C; */
 }
