@@ -9,11 +9,13 @@
   </head>
 
   <body>
-    <div class="centering">
-      <div class="popup-container">
-        <h3 class="popup-title">COOKIES</h3>
+    <div id="cookie-wrapper">
+      <div id="cookie-container">
+        <!-- <div id="cookie-header"> -->
+        <h3 id="cookie-title">COOKIES</h3>
         <img id="logo" src="./images/optAd360.svg" />
-        <section id="cookies-consent">
+        <!-- </div> -->
+        <section id="cookies-info">
           <p class="popup-text">
             Ta strona wykorzystuje pliki cookie. Używamy informacji zapisanych
             za pomocą plików cookies w celu zapewnienia maksymalnej wygody w
@@ -34,8 +36,25 @@
             >
           </p>
           <div class="buttons-container">
-            <button>Accept</button>
-            <button>Reject</button>
+            <button id="accept" class="cookie-button">Accept</button>
+            <button id="reject" class="cookie-button">Reject</button>
+          </div>
+        </section>
+        <section id="cookie-rejection" class="hide">
+          <div id="rejection-container">
+            <p id="rejection-text">
+              Unfortunately, OptAd360 is not able to provide you with the full
+              scope of our services without using cookies. You may read about
+              our cookie policy below. If you still do not agree with our cookie
+              policy, we must regretfully advise you upon leaving the page. If
+              you continue on, the below-mentioned cookies will be used.
+            </p>
+            <div id="accept-container">
+              <button id="accept-second" class="cookie-button">Accept</button>
+            </div>
+            <div id="getBack-container">
+              <a id="getBack">Back</a>
+            </div>
           </div>
         </section>
         <section id="vendor-list" class="hide">

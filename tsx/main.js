@@ -1,6 +1,17 @@
 const body = document.body;
 
-const popup = document.querySelector('.popup-container');
+const popup = document.querySelector('#cookie-container');
+const cookiesInfo = document.querySelector('#cookies-info');
+const cookiesRejection = document.querySelector('#cookie-rejection');
+
+const cookieWrapper = document.querySelector('#cookie-wrapper');
+
+const acceptButton = document.querySelector('#accept');
+const rejectButton = document.querySelector('#reject');
+
+const acceptSecond = document.querySelector('#accept-second');
+const getBack = document.querySelector('#getBack');
+
 const vendorsButton = document.querySelector('#vendors-button');
 const backButton = document.querySelector('.back-btn-handler');
 const selectAllCheckbox = document.querySelector('#select-all-input');
@@ -19,6 +30,32 @@ let isVendorList = false;
 
 const displayPopup = () => {
   popup.classList.add('active');
+};
+
+acceptButton.addEventListener('click', () => {
+  handleDecision('accept');
+});
+
+acceptSecond.addEventListener('click', () => {
+  handleDecision('accept');
+});
+
+rejectButton.addEventListener('click', () => {
+  handleDecision('reject');
+});
+
+getBack.addEventListener('click', () => {
+  cookiesRejection.classList.add('hide');
+  cookiesInfo.classList.remove('hide');
+});
+
+const handleDecision = decision => {
+  if (decision === 'accept') {
+    cookieWrapper.style.display = 'none';
+  } else if (decision === 'reject') {
+    cookiesInfo.classList.add('hide');
+    cookiesRejection.classList.remove('hide');
+  }
 };
 
 // body.addEventListener('load', displayPopup);
@@ -159,7 +196,7 @@ const loadVendors = async () => {
       }
     });
     // ADDING COMPLETE VENDOR ITEM TO THE VENDOR LIST
-    console.log('vendorLink', vendorItem);
+    // console.log('vendorLink', vendorItem);
     vendorsContainer.appendChild(vendorItem);
   });
   allVendors = document.querySelectorAll('.checkbox-input-vendor');
