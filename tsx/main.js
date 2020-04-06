@@ -17,6 +17,8 @@ const backButton = document.querySelector('.back-btn-handler');
 const selectAllCheckbox = document.querySelector('#select-all-input');
 
 let allVendors;
+let agreedVendors;
+let dataFromAPI;
 
 // const correctIcon = document.querySelector('#correctIcon');
 
@@ -49,9 +51,13 @@ getBack.addEventListener('click', () => {
   cookiesInfo.classList.remove('hide');
 });
 
-const handleDecision = decision => {
+const handleDecision = (decision) => {
   if (decision === 'accept') {
+    const checkedVendors = getAgreedVendorsData();
+    setCookie('vendors', `${checkedVendors}`, 1);
     cookieWrapper.style.display = 'none';
+
+    window.removeEventListener('scroll', noScroll);
   } else if (decision === 'reject') {
     cookiesInfo.classList.add('hide');
     cookiesRejection.classList.remove('hide');
@@ -71,7 +77,7 @@ const toggleVendors = () => {
   isVendorList = !isVendorList;
 };
 //  GET VENDORS FROM API
-const getVendors = async url => {
+const getVendors = async (url) => {
   const response = await fetch(url);
   const json = await response.json();
   //   const vendorList = json.vendors;
@@ -83,22 +89,6 @@ let vendorList = getVendors('https://api.optad360.com/vendorlist');
 
 //  END GET VENDORS FROM API
 
-window.addEventListener('load', () => {
-  displayPopup();
-});
-
-// stop scroll
-// if (chuj.visibility === 'hidden') {
-//   window.addEventListener('scroll', noScroll);
-// } else if (chuj.visibility === 'visible') {
-//   window.removeEventListener('scroll', noScroll);
-// }
-
-// function noScroll() {
-//   window.scrollTo(0, 0);
-// }
-// stop scroll
-
 vendorsButton.addEventListener('click', () => {
   toggleVendors();
 });
@@ -108,26 +98,21 @@ backButton.addEventListener('click', () => {
 });
 
 selectAllCheckbox.addEventListener('change', () => {
-  // console.log(selectAllCheckbox.checked);
-  // allVendors = document.querySelectorAll('.checkbox-input-vendor');
-
-  // console.log(allVendors.length);
-
   if (selectAllCheckbox.checked) {
-    allVendors.forEach(checkbox => {
+    allVendors.forEach((checkbox) => {
       checkbox.checked = true;
     });
   } else {
-    allVendors.forEach(checkbox => {
+    allVendors.forEach((checkbox) => {
       checkbox.checked = false;
     });
   }
 });
 
-const allVendorsChecked = checkboxesGroup => {
+const allVendorsChecked = (checkboxesGroup) => {
   const checkboxesArray = Array.from(checkboxesGroup);
 
-  let allChecked = checkboxesArray.every(checkbox => {
+  let allChecked = checkboxesArray.every((checkbox) => {
     // if (!checkbox.checked) return false;
     return checkbox.checked === true;
   });
@@ -136,8 +121,8 @@ const allVendorsChecked = checkboxesGroup => {
 };
 
 const loadVendors = async () => {
-  const myList = await vendorList;
-  myList.forEach(vendor => {
+  dataFromAPI = await vendorList;
+  dataFromAPI.forEach((vendor) => {
     let vendorItem = document.createElement('li');
     let vendorInfo = document.createElement('div');
     let vendorCompany = document.createElement('p');
@@ -166,19 +151,19 @@ const loadVendors = async () => {
       href: `${vendor.policyUrl}`,
       class: 'vendor-link',
       target: '_blank',
-      rel: 'noopener noreferrer'
+      rel: 'noopener noreferrer',
     });
 
     setAttributes(checkboxInput, {
       id: `${vendor.id}`,
       class: 'checkbox-input checkbox-input-vendor',
       type: 'checkbox',
-      checked: 'true'
+      checked: 'true',
     });
 
     setAttributes(checkboxLabel, {
       class: 'checkbox-label',
-      for: `${vendor.id}`
+      for: `${vendor.id}`,
     });
 
     vendorLink.innerHTML = 'Wyświetl politykę prywatności';
@@ -212,3 +197,83 @@ const setAttributes = (el, attrs) => {
     el.setAttribute(key, attrs[key]);
   }
 };
+
+// ADDING 1 DAY TO COOKIE
+function setCookie(c_name, value, exdays) {
+  var c_value = encodeURI(value);
+
+  if (exdays) {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    c_value += '; expires=' + exdate.toUTCString();
+  }
+  document.cookie = c_name + '=' + c_value;
+}
+
+function getCookie(c_name) {
+  var i,
+    x,
+    y,
+    cookies = document.cookie.split(';');
+
+  for (i = 0; i < cookies.length; i++) {
+    x = cookies[i].substr(0, cookies[i].indexOf('='));
+    y = cookies[i].substr(cookies[i].indexOf('=') + 1);
+    x = x.replace(/^\s+|\s+$/g, '');
+
+    if (x === c_name) {
+      return decodeURI(y);
+    }
+  }
+}
+
+// window.setTimeout(function() {
+//   // When the cookie exists, do not show the popup!
+//   if (getCookie('displayedPopupNewsletter')) {
+//     return;
+//   }
+
+//   DiviPopup.openPopup('#get-newsletter');
+
+//   // The popup was displayed. Set the cookie for 1 day.
+//   setCookie('displayedPopupNewsletter', 'yes', 1);
+// }, 3000);
+
+const getAgreedVendorsData = () => {
+  // let theArray = Array.from(allVendors);
+  let agreedVendors = getAgreedVendors();
+
+  return JSON.stringify(
+    dataFromAPI.filter((vendorApi) =>
+      agreedVendors.some(
+        (vendorAgreed) => vendorApi.id === parseInt(vendorAgreed, 10)
+      )
+    )
+  );
+};
+
+//  GET CHECKED VENDORS
+const getAgreedVendors = () => {
+  const vendorsArray = Array.from(allVendors);
+
+  return vendorsArray.reduce((results, vendor) => {
+    if (vendor.checked === true) results.push(vendor.id); // modify is a fictitious function that would apply some change to the items in the array
+    return results;
+  }, []);
+};
+
+setTimeout(displayPopup, 3000);
+
+function noScroll() {
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener('load', () => {
+  if (!getCookie('vendors')) {
+    return;
+  }
+
+  // block scrolling option
+  window.addEventListener('scroll', noScroll);
+  displayPopup();
+});
